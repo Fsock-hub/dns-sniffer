@@ -1,3 +1,6 @@
+import os
+import sys
+
 try:
     from scapy.all import sniff
     from scapy.layers.inet import IP, UDP
