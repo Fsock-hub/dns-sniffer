@@ -19,6 +19,28 @@ except ImportError:
     from scapy.layers.dns import DNS, DNSQR, DNSRR
     print("[+] Scapy installed and imported successfully.")
 
+def check_windows_environment():
+    is_windows = (os.name == 'nt')
+    
+    if is_windows:
+        try:
+            sniff(count=1, timeout=0.1)
+            npcap_failed = False
+        except Exception:
+            npcap_failed = True
+            
+        if is_windows and npcap_failed:
+            print("\n" + "="*60)
+            print("[-] CRITICAL ERROR: Npcap driver is missing!")
+            print("[*] To run this sniffer on Windows, you must install Npcap.")
+            print("[*] Download it from the official site: https://npcap.com")
+            print("="*60 + "\n")
+            sys.exit(1)
+
+check_windows_environment()
+
+print("[+] Environment check passed! Starting DNS Sniffer...")
+
 def process_dns_packet(packet):
     if packet.haslayer(DNS):
         ip_src = packet[IP].src
