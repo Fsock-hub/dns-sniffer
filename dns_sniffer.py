@@ -1,6 +1,20 @@
-from scapy.all import sniff
-from scapy.layers.inet import IP, UDP
-from scapy.layers.dns import DNS, DNSQR, DNSRR
+try:
+    from scapy.all import sniff
+    from scapy.layers.inet import IP, UDP
+    from scapy.layers.dns import DNS, DNSQR, DNSRR
+    
+except ImportError:
+    print("[*] Scapy module not found. Attempting auto-installation...")
+    exit_code = os.system(f"{sys.executable} -m pip install scapy")
+    
+    if exit_code != 0:
+        print("[-] Auto-installation failed. Please run: pip install scapy")
+        sys.exit(1)
+        
+    from scapy.all import sniff
+    from scapy.layers.inet import IP, UDP
+    from scapy.layers.dns import DNS, DNSQR, DNSRR
+    print("[+] Scapy installed and imported successfully.")
 
 def process_dns_packet(packet):
     if packet.haslayer(DNS):
