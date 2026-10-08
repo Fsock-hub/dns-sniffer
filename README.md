@@ -29,36 +29,37 @@ The tool does not modify or inject packets. It only reads and displays DNS traff
 ## Installation
 
 - Clone the repository:
-  '''bash
+  ```bash
       git clone https://github.com/Fsock-hub/dns-sniffer.git
       cd dns-sniffer
-  '''
+  ```
 - Install the required dependency:
-  '''bash
+  ```bash
     pip install scapy
-  '''
+  ```
 - Run the sniffer (requires root or administrator privileges):
-  '''bash
+  ```bash
     sudo python dns_sniffer.py
-  '''
-    On Windows, run the terminal as Administrator.
+  ```
+```On Windows, run the terminal as Administrator.```
 
 ## Usage
 
 The script listens on all interfaces by default. To specify an interface, modify the iface parameter in the sniff() call.
 
 Example output:
-text
+```text
 
 [QUERY] Client 192.168.1.5 -> Server 8.8.8.8 | Searching domain: example.com.
 [RESPONSE] Server 8.8.8.8 -> Client 192.168.1.5 | Domain: example.com.
    -> IP: 93.184.216.34
+```
 
 ## Requirements
 
 - Python 3.6 or higher
 
-- scapy library
+- Scapy library and Npcap driver
 
 - Root/administrator privileges (required for raw socket access)
 
